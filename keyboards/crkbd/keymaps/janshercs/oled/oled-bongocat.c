@@ -294,13 +294,7 @@ oled_rotation_t oled_init_user(oled_rotation_t const rotation) {
 
 
 bool oled_task_user(void) {
-	extern void oled_render_layer_state(void);
-	extern void oled_render_keylog(void);
-	if (is_keyboard_master()) {
-        render_bongocat();
-    } else {
-        oled_render_layer_state();
-        oled_render_keylog();
-    }
+	extern void render_mod_status(void);
+	is_keyboard_master() ? render_bongocat() : render_mod_status();
 	return false;
 }
