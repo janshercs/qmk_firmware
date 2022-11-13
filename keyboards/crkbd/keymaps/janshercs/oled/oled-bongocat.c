@@ -284,17 +284,17 @@ static void render_bongocat(void) {
 
 
 // Init and rendering calls
-oled_rotation_t oled_init_user(oled_rotation_t const rotation) {
-	if (is_keyboard_master()) {
-		return is_keyboard_left() ? rotation : OLED_ROTATION_180;
-	} else {
-		return OLED_ROTATION_180;
-	}
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+  if (!is_keyboard_master()) {
+    return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
+  }
+  return rotation;
 }
 
 
 bool oled_task_user(void) {
 	extern void render_mod_status(void);
-	is_keyboard_master() ? render_bongocat() : render_mod_status();
+	// is_keyboard_master() ? render_bongocat() : render_mod_status();
+	is_keyboard_master() ? render_mod_status() : render_bongocat() ;
 	return false;
 }

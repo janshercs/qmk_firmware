@@ -74,8 +74,6 @@ void render_bootmagic_status(bool status) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     set_keylog(keycode, record);
-    extern uint32_t oled_tap_timer;
-    oled_tap_timer = timer_read32();
   }
   return true;
 }
